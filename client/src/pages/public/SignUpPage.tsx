@@ -9,11 +9,8 @@ import { signUpEffect } from "../../store/effects/auth/auth.effects";
 const useStyles = makeStyles((theme) => ({
   form: {
     width: "100%",
-    // marginTop: theme.spacing(1),
   },
-  submit: {
-    // marginTop: theme.spacing(2), // Adjust this according to your layout
-  },
+  submit: {},
 }));
 
 const SignUpPage: React.FC = () => {

@@ -7,8 +7,6 @@ import {
   DialogTitle,
   TextField,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import { CreateProductService } from "../../../../services/product.service";
 import { useDispatch } from "react-redux";
 import { updateProdutEffect } from "../../../../store/effects/product/product.effect";
 import { ProductType } from "../../../../store/types/product/product";
@@ -20,7 +18,6 @@ interface PopupProps {
 }
 
 const EditProduct: React.FC<PopupProps> = ({ open, onClose, product }) => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [formData, setFormData] = useState<ProductType>(product);
 
@@ -37,7 +34,7 @@ const EditProduct: React.FC<PopupProps> = ({ open, onClose, product }) => {
 
     dispatch(updateProdutEffect(formData));
 
-    onClose(); // Close the dialog
+    onClose();
   };
 
   return (

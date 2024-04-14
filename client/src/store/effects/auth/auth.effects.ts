@@ -1,10 +1,6 @@
 import { NavigateFunction } from "react-router-dom";
 import { AppDispatch } from "../..";
-import {
-  loginRequest,
-  logOutRequest,
-  SignUpRequest,
-} from "../../../services/auth.service";
+import { loginRequest, SignUpRequest } from "../../../services/auth.service";
 import { LoginDataType, SignUpDataType } from "../../../services/types";
 import {
   loginRequestSuccess,
@@ -20,7 +16,7 @@ export const loginEffect = (
       const result = await loginRequest(loginData);
 
       const {
-        data: { token, uid, user },
+        data: { token, user },
       } = result;
 
       await localStorage.setItem("accessToken", token);
@@ -41,8 +37,6 @@ export const loginEffect = (
 export const logOutEffect = (): any => {
   return async (dispatch: AppDispatch, navigate: NavigateFunction) => {
     try {
-      await logOutRequest();
-
       await localStorage.clear();
 
       dispatch(logOutRequestSuccess());
@@ -57,7 +51,7 @@ export const signUpEffect = (
 ): any => {
   return async (dispatch: AppDispatch) => {
     try {
-      const user = await SignUpRequest(signUpData);
+      await SignUpRequest(signUpData);
 
       navigate("/login");
     } catch (error: any) {

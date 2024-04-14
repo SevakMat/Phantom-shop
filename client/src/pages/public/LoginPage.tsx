@@ -9,7 +9,6 @@ import { useNavigate } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   form: {
     width: "100%",
-    // marginTop: theme.spacing(1),
   },
 }));
 
@@ -74,13 +73,7 @@ const LoginPage: React.FC = () => {
               />
             </Grid>
           </Grid>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            // className={classes.submit}
-          >
+          <Button type="submit" fullWidth variant="contained" color="primary">
             Log In
           </Button>
         </form>

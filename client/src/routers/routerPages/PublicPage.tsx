@@ -8,7 +8,6 @@ const PublicPageRoute: PublicRouter = {
     {
       path: "/login",
       element: <LoginPage />,
-      // element: <div>asd</div>,
     },
     {
       path: "/sign-up",

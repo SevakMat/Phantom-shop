@@ -1,4 +1,3 @@
-// import { Helmet } from 'react-helmet-async';
 import { Grid, Container } from "@mui/material";
 
 import ProductsContainer from "./ProductsContainer";

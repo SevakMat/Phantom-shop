@@ -15,9 +15,8 @@ const SearchComponent: React.FC = () => {
       clearTimeout(debounceTimer);
     }
     const timer = setTimeout(() => {
-      console.log(query);
       dispatch(SearchProdutEffect(query));
-    }, 400); // Debounce time set to 400 milliseconds
+    }, 400);
     setDebounceTimer(timer);
   };
 

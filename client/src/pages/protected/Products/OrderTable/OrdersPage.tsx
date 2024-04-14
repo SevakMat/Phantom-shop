@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Card, Container, Grid } from "@mui/material";
+import { Container, Grid } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { AppDispatch, RootState, useAppSelector } from "../../../../store";
 import { getAllOrdersEffect } from "../../../../store/effects/order/order.effect";

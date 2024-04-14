@@ -1,5 +1,3 @@
-import { NavigateFunction } from "react-router-dom";
-
 import { AppDispatch } from "../..";
 import {
   GetAllOrdersService,
@@ -8,10 +6,7 @@ import {
 import { ProductType } from "../../types/product/product";
 import { SetOrdersSuccess } from "../../actions/order/order.action";
 
-export const createOrderEffect = (
-  cartItems: ProductType[],
-  navigate: NavigateFunction
-): any => {
+export const createOrderEffect = (cartItems: ProductType[]): any => {
   return async (dispatch: AppDispatch) => {
     try {
       const getAllIds = (products: ProductType[]): string[] => {
@@ -24,14 +19,11 @@ export const createOrderEffect = (
         );
       };
       const createdProductIds = getAllIds(cartItems);
-      console.log(333, createdProductIds);
 
       await createOrderService(createdProductIds);
-      navigate("/home");
     } catch (error: any) {
       console.log(error);
     } finally {
-      // Any cleanup code if needed
     }
   };
 };
@@ -48,7 +40,6 @@ export const getAllOrdersEffect = (): any => {
     } catch (error: any) {
       console.log(error);
     } finally {
-      // Any cleanup code if needed
     }
   };
 };

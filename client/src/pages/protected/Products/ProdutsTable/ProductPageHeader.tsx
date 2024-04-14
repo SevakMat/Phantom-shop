@@ -23,7 +23,6 @@ function ProductPageHeader() {
           onClick={() => {
             setOpen(true);
           }}
-          // startIcon={<AddTwoToneIcon fontSize="small" />}
         >
           Create Product
         </Button>

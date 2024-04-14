@@ -6,7 +6,6 @@ import {
   SearchProductsService,
 } from "../../../services/product.service";
 import { ProductType } from "../../types/product/product";
-import { loginRequestSuccess } from "../../actions/auth/auth.actions";
 import {
   SetProductSuccess,
   SetProductsSuccess,
@@ -23,7 +22,6 @@ export const getAllProductsEffect = (): any => {
     } catch (error: any) {
       console.log(error);
     } finally {
-      // Any cleanup code if needed
     }
   };
 };
@@ -40,7 +38,6 @@ export const createProdutEffect = (productData: ProductType): any => {
     } catch (error: any) {
       console.log(error);
     } finally {
-      // Any cleanup code if needed
     }
   };
 };
@@ -55,7 +52,6 @@ export const updateProdutEffect = (productData: ProductType): any => {
     } catch (error: any) {
       console.log(error);
     } finally {
-      // Any cleanup code if needed
     }
   };
 };
@@ -63,22 +59,16 @@ export const updateProdutEffect = (productData: ProductType): any => {
 export const SearchProdutEffect = (name: string): any => {
   return async (dispatch: AppDispatch) => {
     try {
-      // You can dispatch actions before making the API call if needed
       const result = await SearchProductsService(name);
 
       const {
         data: { products },
       } = result;
-      console.log(products);
 
       dispatch(SetProductsSuccess(products));
-
-      // Handle success response as needed
     } catch (error: any) {
       console.log(error);
-      // Handle error response as needed
     } finally {
-      // Any cleanup code if needed
     }
   };
 };

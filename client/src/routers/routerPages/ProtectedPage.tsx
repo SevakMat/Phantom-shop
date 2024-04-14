@@ -1,5 +1,6 @@
+import MePage from "../../pages/protected/Me/MePage";
 import Products from "../../pages/protected/Products/ProdutsTable";
-import OrdersPage from "../../pages/protected/Products/userProduct/OrdersPage";
+import OrdersPage from "../../pages/protected/Products/OrderTable/OrdersPage";
 import CreateProductPage from "../../pages/protected/user/CreateProductPage";
 import ProtectedRoute from "../types/ProtectedRoute";
 
@@ -13,6 +14,10 @@ const ProtectedPageRoute: ProtectedRoute = {
     {
       path: "/admin/orders",
       element: <OrdersPage />,
+    },
+    {
+      path: "/me",
+      element: <MePage />,
     },
 
     {

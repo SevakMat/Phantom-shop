@@ -62,10 +62,6 @@ const OrdersTable: FC<OrdersTableProps> = ({ orders = [] }) => {
 
   const filteredOrders = applyFilters(orders, filters);
   const paginatedOrders = applyPagination(filteredOrders, page, limit);
-  const selectedSomeOrders =
-    selectedOrders.length > 0 && selectedOrders.length < orders.length;
-
-  console.log(orders);
 
   return (
     <Card>

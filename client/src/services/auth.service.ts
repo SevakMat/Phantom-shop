@@ -11,7 +11,3 @@ export const SignUpRequest = async (
 ): Promise<any> => {
   return axios.post("api/register", { ...signUpData });
 };
-
-export const logOutRequest = async (): Promise<any> => {
-  return axios.post("api/logout", {});
-};

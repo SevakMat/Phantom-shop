@@ -1,4 +1,3 @@
-// App.tsx
 import React, { useEffect, useState } from "react";
 import {
   DragDropContext,
@@ -9,7 +8,6 @@ import {
 import { Container, Grid, Paper, Typography, Button } from "@mui/material";
 import { ProductType } from "../../../store/types/product/product";
 import { createOrderEffect } from "../../../store/effects/order/order.effect";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 interface CreateProductProps {
@@ -19,7 +17,6 @@ interface CreateProductProps {
 const CreateProduct: React.FC<CreateProductProps> = ({ products }) => {
   const [cartProducts, setCartProducts] = useState<ProductType[]>(products);
   const [cartItems, setCartItems] = useState<ProductType[]>([]);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   useEffect(() => {
     setCartProducts(products);
@@ -37,11 +34,8 @@ const CreateProduct: React.FC<CreateProductProps> = ({ products }) => {
   };
 
   const handleCartSubmit = () => {
-    // Implement your logic to submit cart items here
-    dispatch(createOrderEffect(cartItems, navigate));
+    dispatch(createOrderEffect(cartItems));
   };
-
-  console.log(cartItems);
 
   return (
     <Container>

@@ -23,14 +23,11 @@ const reducer: ReducerType = (
       };
 
     case ProductServerType.SET_PRODUCT_SUCCESS:
-      // Check if the product already exists in the array
       const existingProductIndex = state.products.findIndex(
         (product) => product._id === action.product._id
       );
 
-      // If the product exists, update it; otherwise, add it
       if (existingProductIndex !== -1) {
-        // Product already exists, update it
         const updatedProducts = [...state.products];
         updatedProducts[existingProductIndex] = action.product;
 
@@ -39,7 +36,6 @@ const reducer: ReducerType = (
           products: updatedProducts,
         };
       } else {
-        // Product doesn't exist, add it
         return {
           ...state,
           products: [...state.products, action.product],

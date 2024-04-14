@@ -21,14 +21,12 @@ const rootReducer = combineReducers({
   order: orderReducer,
 });
 
-// es masy naxatescvac a storige um pahelu hamar
 const persistConfig: PersistConfig<any> = {
   key: "root",
   storage,
   whitelist: ["auth"],
 };
 
-// Middleware: Redux Persist Persisted Reducer
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({

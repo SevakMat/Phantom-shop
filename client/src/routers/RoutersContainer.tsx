@@ -4,7 +4,7 @@ import { RootState } from "../store";
 import { useAppSelector } from "../store";
 
 const RoutersContainer: () => JSX.Element = () => {
-  const { isLoggedIn } = useAppSelector((state: RootState) => {
+  const { isLoggedIn, user } = useAppSelector((state: RootState) => {
     return state.auth;
   });
 
@@ -15,8 +15,19 @@ const RoutersContainer: () => JSX.Element = () => {
           return routerProps.map((flan) =>
             isPrivate && !isLoggedIn ? (
               <Route path={flan.path} element={<Navigate to="/login" />} />
-            ) : !isPrivate && !isLoggedIn ? (
-              <Route path={flan.path} element={<Navigate to="/home" />} />
+            ) : !isPrivate && isLoggedIn ? (
+              <Route
+                path={flan.path}
+                element={
+                  <Navigate
+                    to={
+                      user?.role === "ADMIN"
+                        ? "/admin/products"
+                        : "/user/product/create"
+                    }
+                  />
+                }
+              />
             ) : (
               <Route path={flan.path} element={flan.element} />
             )
