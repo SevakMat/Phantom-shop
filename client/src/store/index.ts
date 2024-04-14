@@ -13,10 +13,12 @@ import { PersistConfig } from "redux-persist/es/types";
 
 import authReducer from "./reducers/auth/auth.reducers";
 import productReducer from "./reducers/product/products.reducers";
+import orderReducer from "./reducers/orders/orders.reducers";
 
 const rootReducer = combineReducers({
   auth: authReducer,
   product: productReducer,
+  order: orderReducer,
 });
 
 // es masy naxatescvac a storige um pahelu hamar

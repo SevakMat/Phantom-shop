@@ -2,8 +2,6 @@ import { Typography, Button, Grid } from "@mui/material";
 import { useState } from "react";
 import CreateProduct from "./CreateProduct";
 
-// import AddTwoToneIcon from '@mui/icons-material/AddTwoTone';
-
 function ProductPageHeader() {
   const [open, setOpen] = useState<boolean>(false);
 

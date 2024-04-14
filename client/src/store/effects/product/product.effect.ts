@@ -1,10 +1,8 @@
 import { AppDispatch } from "../..";
-import { NavigateFunction } from "react-router";
 import {
   CreateProductService,
   EditProductService,
   GetAllProductsService,
-  GetProductService,
   SearchProductsService,
 } from "../../../services/product.service";
 import { ProductType } from "../../types/product/product";

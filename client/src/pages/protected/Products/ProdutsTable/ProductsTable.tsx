@@ -61,36 +61,6 @@ const ProductsTable: FC<ProductsTableProps> = ({ products = [] }) => {
   const [limit, setLimit] = useState<number>(5);
   const [filters, setFilters] = useState<Filters>({});
 
-  const handleStatusChange = (e: ChangeEvent<HTMLInputElement>): void => {
-    let value = null;
-
-    if (e.target.value !== "all") {
-      value = e.target.value;
-    }
-
-    // setFilters((prevFilters) => ({
-    //   ...prevFilters,
-    //   status: value,
-    // }));
-  };
-
-  const handleFilterChange = (filter: string, value: string): void => {
-    setFilters((prevFilters) => ({
-      ...prevFilters,
-      [filter]: value,
-    }));
-  };
-
-  const handleSelectAllProducts = (
-    event: ChangeEvent<HTMLInputElement>
-  ): void => {
-    setSelectedProducts(
-      event.target.checked
-        ? products.map((product) => product._id as string)
-        : []
-    );
-  };
-
   const handleSelectOneProducts = (
     event: ChangeEvent<HTMLInputElement>,
     productId: string

@@ -1,1 +1,2 @@
-export * from './add';
+export * from "./add";
+export * from "./all";

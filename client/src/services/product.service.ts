@@ -17,10 +17,6 @@ export const EditProductService = async (
   });
 };
 
-export const GetProductService = async (id: string): Promise<any> => {
-  return axios.get(`api/product/:${id}`);
-};
-
 export const GetAllProductsService = async (): Promise<any> => {
   return axios.get("api/product/all");
 };
