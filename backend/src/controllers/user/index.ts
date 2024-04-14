@@ -1,0 +1,1 @@
+export { allUser } from './all';
