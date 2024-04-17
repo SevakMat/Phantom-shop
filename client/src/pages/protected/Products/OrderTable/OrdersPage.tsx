@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { AppDispatch, RootState, useAppSelector } from "../../../../store";
 import { getAllOrdersEffect } from "../../../../store/effects/order/order.effect";
 import OrdersTable from "./OrdersTable";
-import OrderPageHeader from "./OrderPageHeader";
+import OrderPageHeader from "../../../public/pageHeader/PageHeader";
 import PageTitleWrapper from "../../../public/PageTitleWrapper";
 
 function OrdersPage() {
@@ -19,7 +19,7 @@ function OrdersPage() {
   return (
     <>
       <PageTitleWrapper>
-        <OrderPageHeader />
+        <OrderPageHeader title="Orders" />
       </PageTitleWrapper>
       <Container maxWidth="lg">
         <Grid

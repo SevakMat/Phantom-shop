@@ -2,6 +2,7 @@ export enum AuthTypes {
   REGISTER_REQUEST_SUCCESS = "REGISTER_REQUEST_SUCCESS",
   LOGIN_REQUEST_SUCCESS = "LOGIN_REQUEST_SUCCESS",
   LOGOUT_REQUEST_SUCCESS = "LOGOUT_REQUEST_SUCCESS",
+  SET_SLIDER_STATE = "SET_SLIDER_STATE",
 }
 
 export interface AuthState {
@@ -15,6 +16,7 @@ export interface User {
   lastName: string;
   email: string;
   role: string;
+  avatar?: string;
 }
 
 export interface RegisterRequestSuccess {
@@ -31,7 +33,12 @@ export interface LogOutRequestSuccess {
   type: AuthTypes.LOGOUT_REQUEST_SUCCESS;
 }
 
+export interface SetSliderState {
+  type: AuthTypes.SET_SLIDER_STATE;
+}
+
 export type AuthActionTypes =
   | LoginRequestSuccess
   | LogOutRequestSuccess
-  | RegisterRequestSuccess;
+  | RegisterRequestSuccess
+  | SetSliderState;

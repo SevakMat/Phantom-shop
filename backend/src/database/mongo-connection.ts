@@ -1,6 +1,6 @@
-import mongoose, { ConnectionOptions } from 'mongoose';
-import { logger } from '../logger';
-import { seedScript } from './seed';
+import mongoose, { ConnectionOptions } from "mongoose";
+import { logger } from "../logger";
+import { seedScript } from "./seed";
 
 (<any>mongoose).Promise = global.Promise;
 
@@ -18,25 +18,25 @@ export default class MongoConnection {
   private readonly mongoConnectionOptions: ConnectionOptions = {
     useNewUrlParser: true,
     useCreateIndex: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
   };
 
   constructor(mongoUrl: string) {
-    if (process.env.NODE_ENV === 'development') {
-      mongoose.set('debug', true);
+    if (process.env.NODE_ENV === "development") {
+      mongoose.set("debug", true);
     }
 
     this.mongoUrl = mongoUrl;
-    mongoose.connection.on('error', this.onError);
-    mongoose.connection.on('disconnected', this.onDisconnected);
-    mongoose.connection.on('connected', this.onConnected);
-    mongoose.connection.on('reconnected', this.onReconnected);
+    mongoose.connection.on("error", this.onError);
+    mongoose.connection.on("disconnected", this.onDisconnected);
+    mongoose.connection.on("connected", this.onConnected);
+    mongoose.connection.on("reconnected", this.onReconnected);
   }
 
   public close(onClosed: (err: any) => void) {
     logger.log({
-      level: 'info',
-      message: 'Closing the MongoDB connection'
+      level: "info",
+      message: "Closing the MongoDB connection",
     });
     mongoose.connection.close(onClosed);
   }
@@ -48,35 +48,36 @@ export default class MongoConnection {
 
   private startConnection = () => {
     logger.log({
-      level: 'info',
-      message: `Connecting to MongoDB at ${this.mongoUrl}`
+      level: "info",
+      message: `Connecting to MongoDB at ${this.mongoUrl}`,
     });
-    mongoose.connect(this.mongoUrl, this.mongoConnectionOptions).catch(() => { });
-  }
+    mongoose
+      .connect(this.mongoUrl, this.mongoConnectionOptions)
+      .catch(() => {});
+  };
 
   private onConnected = async () => {
     logger.log({
-      level: 'info',
-      message: `Connected to MongoDB at ${this.mongoUrl}`
+      level: "info",
+      message: `Connected to MongoDB at ${this.mongoUrl}`,
     });
     await seedScript();
-    // run seed
     this.isConnectedBefore = true;
     this.onConnectedCallback();
   };
 
   private onReconnected = () => {
     logger.log({
-      level: 'info',
-      message: 'Reconnected to MongoDB'
+      level: "info",
+      message: "Reconnected to MongoDB",
     });
     this.onConnectedCallback();
   };
 
   private onError = () => {
     logger.log({
-      level: 'error',
-      message: `Could not connect to ${this.mongoUrl}`
+      level: "error",
+      message: `Could not connect to ${this.mongoUrl}`,
     });
   };
 
@@ -86,8 +87,8 @@ export default class MongoConnection {
         this.startConnection();
       }, 2000);
       logger.log({
-        level: 'info',
-        message: 'Retrying mongo connection'
+        level: "info",
+        message: "Retrying mongo connection",
       });
     }
   };

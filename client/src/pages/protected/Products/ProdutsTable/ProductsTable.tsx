@@ -143,6 +143,7 @@ const ProductsTable: FC<ProductsTableProps> = ({ products = [] }) => {
           page={page}
           rowsPerPage={limit}
           rowsPerPageOptions={[5, 10, 25, 30]}
+          ActionsComponent={() => <span />}
         />
       </Box>
     </Card>

@@ -1,14 +1,39 @@
 import React, { useState } from "react";
 import { makeStyles } from "@mui/styles";
-import { TextField, Button, Grid, Typography } from "@mui/material";
+import {
+  TextField,
+  Button,
+  Grid,
+  Typography,
+  CircularProgress,
+  Theme,
+} from "@mui/material";
 import { LoginDataType } from "../../services/types";
 import { useDispatch } from "react-redux";
 import { loginEffect } from "../../store/effects/auth/auth.effects";
 import { useNavigate } from "react-router-dom";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme: Theme) => ({
+  root: {
+    background: "#f0f2f5",
+    height: "100vh",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
   form: {
     width: "100%",
+    border: `1px solid ${theme.palette.divider}`,
+    borderRadius: theme.shape.borderRadius,
+    padding: 15,
+    backgroundColor: "#ffffff",
+  },
+  submitButton: {
+    marginTop: theme.spacing(2),
+    backgroundColor: "#1877f2",
+    "&:hover": {
+      backgroundColor: "#1467c9",
+    },
   },
 }));
 
@@ -22,6 +47,8 @@ const LoginPage: React.FC = () => {
     password: "",
   });
 
+  const [loading, setLoading] = useState(false);
+
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormData((prevData) => ({
@@ -30,13 +57,15 @@ const LoginPage: React.FC = () => {
     }));
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    dispatch(loginEffect(formData, navigate));
+    setLoading(true);
+    await dispatch(loginEffect(formData, navigate));
+    setLoading(false);
   };
 
   return (
-    <Grid container justifyContent="center">
+    <div className={classes.root}>
       <Grid item xs={12} md={6}>
         <Typography variant="h4" align="center" gutterBottom>
           Log In
@@ -73,12 +102,23 @@ const LoginPage: React.FC = () => {
               />
             </Grid>
           </Grid>
-          <Button type="submit" fullWidth variant="contained" color="primary">
-            Log In
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submitButton}
+            disabled={loading}
+          >
+            {loading ? (
+              <CircularProgress size={24} color="inherit" />
+            ) : (
+              "Log In"
+            )}
           </Button>
         </form>
       </Grid>
-    </Grid>
+    </div>
   );
 };
 

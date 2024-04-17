@@ -91,7 +91,7 @@ const OrdersTable: FC<OrdersTableProps> = ({ orders = [] }) => {
                 >
                   <TableCell>{order._id}</TableCell>
                   <TableCell>{order.user}</TableCell>
-                  <TableCell>{order.totalAmount}</TableCell>
+                  <TableCell>{order.totalAmount}$</TableCell>
                   <TableCell>{`${
                     new Date(order.date).getMonth() + 1
                   }/${new Date(order.date).getDate()}/${new Date(
@@ -112,6 +112,7 @@ const OrdersTable: FC<OrdersTableProps> = ({ orders = [] }) => {
           page={page}
           rowsPerPage={limit}
           rowsPerPageOptions={[5, 10, 25, 30]}
+          ActionsComponent={() => <span />}
         />
       </Box>
     </Card>

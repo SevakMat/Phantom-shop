@@ -3,6 +3,7 @@ import {
   LoginRequestSuccess,
   LogOutRequestSuccess,
   RegisterRequestSuccess,
+  SetSliderState,
   User,
 } from "../../types/auth/auth";
 
@@ -18,4 +19,8 @@ export const registerRequestSuccess = (user: User): RegisterRequestSuccess => ({
 
 export const logOutRequestSuccess = (): LogOutRequestSuccess => ({
   type: AuthTypes.LOGOUT_REQUEST_SUCCESS,
+});
+
+export const setSliderState = (): SetSliderState => ({
+  type: AuthTypes.SET_SLIDER_STATE,
 });

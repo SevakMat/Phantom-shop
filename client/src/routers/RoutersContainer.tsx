@@ -7,7 +7,6 @@ const RoutersContainer: () => JSX.Element = () => {
   const { isLoggedIn, user } = useAppSelector((state: RootState) => {
     return state.auth;
   });
-
   return (
     <BrowserRouter>
       <Routes>

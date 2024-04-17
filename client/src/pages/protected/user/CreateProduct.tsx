@@ -5,7 +5,16 @@ import {
   Draggable,
   DropResult,
 } from "react-beautiful-dnd";
-import { Container, Grid, Paper, Typography, Button } from "@mui/material";
+import {
+  Container,
+  Grid,
+  Paper,
+  Button,
+  CardHeader,
+  Divider,
+  Box,
+  CircularProgress,
+} from "@mui/material";
 import { ProductType } from "../../../store/types/product/product";
 import { createOrderEffect } from "../../../store/effects/order/order.effect";
 import { useDispatch } from "react-redux";
@@ -17,13 +26,18 @@ interface CreateProductProps {
 const CreateProduct: React.FC<CreateProductProps> = ({ products }) => {
   const [cartProducts, setCartProducts] = useState<ProductType[]>(products);
   const [cartItems, setCartItems] = useState<ProductType[]>([]);
+  const [loading, setLoading] = useState(false);
+
   const dispatch = useDispatch();
+
   useEffect(() => {
     setCartProducts(products);
   }, [products]);
 
   const handleDragEnd = (result: DropResult) => {
     const draggedItem = cartProducts[result.source.index];
+    console.log(draggedItem);
+
     setCartProducts((prevProducts) => {
       const newProducts = [...prevProducts];
       newProducts.splice(result.source.index, 1);
@@ -33,21 +47,20 @@ const CreateProduct: React.FC<CreateProductProps> = ({ products }) => {
     setCartItems((prevCartItems) => [...prevCartItems, draggedItem]);
   };
 
-  const handleCartSubmit = () => {
-    dispatch(createOrderEffect(cartItems));
+  const handleCartSubmit = async () => {
+    setLoading(true);
+    await dispatch(createOrderEffect(cartItems));
+    setLoading(false);
   };
+  console.log(cartItems);
 
   return (
     <Container>
-      <Typography variant="h4" gutterBottom>
-        Drag and Drop Example
-      </Typography>
       <Grid container spacing={3}>
-        <Grid item xs={6}>
-          <Paper style={{ height: "300px" }}>
-            <Typography variant="h5" gutterBottom>
-              Products
-            </Typography>
+        <Grid item xs={12} sm={6}>
+          <Paper style={{ height: "300px", overflow: "auto" }}>
+            <CardHeader title="All Products" />
+            <Divider />
             <DragDropContext onDragEnd={handleDragEnd}>
               <Droppable droppableId="products">
                 {(provided) => (
@@ -86,13 +99,20 @@ const CreateProduct: React.FC<CreateProductProps> = ({ products }) => {
             </DragDropContext>
           </Paper>
         </Grid>
-        <Grid item xs={6}>
-          <Paper style={{ height: "300px" }}>
-            <Typography variant="h5" gutterBottom>
-              Cart
-            </Typography>
-            {cartItems.map((item) => (
-              <>
+        <Grid item xs={12} sm={6}>
+          <Paper
+            style={{
+              height: "300px",
+              overflow: "auto",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+            }}
+          >
+            <Box>
+              <CardHeader title="Cart" />
+              <Divider />
+              {cartItems.map((item) => (
                 <Paper
                   key={item._id}
                   style={{
@@ -105,19 +125,42 @@ const CreateProduct: React.FC<CreateProductProps> = ({ products }) => {
                   <div>{item.name}</div>
                   <div>{item.price}$</div>
                 </Paper>
-              </>
-            ))}
+              ))}
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-around",
+                mb: 2,
+              }}
+            >
+              <Box
+                sx={{
+                  display: "flex",
+                  border: `1px solid black`,
+                  borderRadius: "10px",
+                  height: "auto",
+                  width: 87,
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                {cartItems.reduce((acc, item) => acc + item.price, 0)}
+              </Box>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={handleCartSubmit}
+                disabled={!cartItems.length}
+              >
+                {loading ? (
+                  <CircularProgress size={24} color="inherit" />
+                ) : (
+                  "Buy Products"
+                )}
+              </Button>
+            </Box>
           </Paper>
-        </Grid>
-        <Grid item xs={6}>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={handleCartSubmit}
-            disabled={!cartItems.length}
-          >
-            Submit
-          </Button>
         </Grid>
       </Grid>
     </Container>

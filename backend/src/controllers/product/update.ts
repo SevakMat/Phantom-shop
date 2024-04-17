@@ -8,7 +8,6 @@ export const updateProductSchema = Joi.object().keys({
   price: Joi.number(),
 });
 
-// eslint-disable-next-line consistent-return
 const updateWrapper: RequestHandler = async (req, res) => {
   const { productId } = req.query;
   const { name, price } = req.body;
