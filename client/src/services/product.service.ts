@@ -4,23 +4,23 @@ import { ProductType } from "../store/types/product/product";
 export const CreateProductService = async (
   createProductData: ProductType
 ): Promise<any> => {
-  return axios.post("api/product/add", { ...createProductData });
+  return axios.post("task/product/add", { ...createProductData });
 };
 
 export const EditProductService = async (
   editProductData: ProductType
 ): Promise<any> => {
   const { _id: productId } = editProductData;
-  return axios.patch(`api/product/update?productId=${productId}`, {
+  return axios.patch(`task/product/update?productId=${productId}`, {
     name: editProductData.name,
     price: editProductData.price,
   });
 };
 
 export const GetAllProductsService = async (): Promise<any> => {
-  return axios.get("api/product/all");
+  return axios.get("task/product/all");
 };
 
 export const SearchProductsService = async (name: string): Promise<any> => {
-  return axios.get(`api/product/search?name=${name}`);
+  return axios.get(`task/product/search?name=${name}`);
 };
